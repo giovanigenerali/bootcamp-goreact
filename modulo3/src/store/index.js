@@ -1,10 +1,17 @@
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 
-import reducers from "../reducers";
+import reducers from "./reducers";
 
-const store = createStore(
-  reducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const tronMiddleware =
+  process.env.NODE_ENV === "development"
+    ? console.tron.createEnhancer
+    : () => {};
+
+const composeEnhancers =
+  process.env.NODE_ENV === "development"
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
+
+const store = createStore(reducers, composeEnhancers(tronMiddleware()));
 
 export default store;
