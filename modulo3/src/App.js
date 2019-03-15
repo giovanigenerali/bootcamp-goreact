@@ -5,13 +5,13 @@ import "./config/reactotron.js";
 
 import store from "./store";
 
-import TodoList from "./TodoList";
+import Routes from "./routes";
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <TodoList />
+        <Routes />
       </Provider>
     );
   }
