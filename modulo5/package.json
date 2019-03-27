@@ -20,6 +20,17 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/store/ducks/*.js",
+      "!src/store/ducks/index.js",
+      "src/store/sagas/*.js",
+      "src/*.js",
+      "!src/App.js",
+      "!src/setupTests.js",
+      "!src/index.js"
+    ]
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
