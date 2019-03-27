@@ -28,4 +28,21 @@ describe("Repositories Saga", () => {
       RepositoriesActions.getSuccess(["Repo 1", "Repo 2"])
     );
   });
+
+  it("should be unable to fetch repositories", async () => {
+    const dispatched = [];
+
+    apiMock.onGet("/users/giovanigenerali/repos").reply(400);
+
+    await runSaga(
+      {
+        dispatch: action => {
+          dispatched.push(action);
+        }
+      },
+      getRepositories
+    ).toPromise();
+
+    expect(dispatched).toContainEqual(RepositoriesActions.getFailure());
+  });
 });
